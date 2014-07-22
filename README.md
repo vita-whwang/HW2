@@ -47,6 +47,7 @@
 	}
 
 　* 所有看到 db.Entry(client).State = EntityState.Modified; 的寫法，都要改成資料繫結延遲驗證的方式做檢查 ( TryUpdateModel )，然後搭配自訂的 Interface 去針對特定表單欄位做 Model Binding，避免 over-posting 的問題發生。
+　* 實作匯出資料功能，可將「客戶資料」匯出，用 FileResult 輸出檔案，輸出格式不拘 (XLS, CSV, ...)，下載檔名規則："YYYYMMDD_客戶資料匯出.xlsx"。
 　
 
   * 實作匯出資料功能，可將「客戶資料」匯出，用 FileResult 輸出檔案，輸出格式不拘 (XLS, CSV, ...)，下載檔名規則："YYYYMMDD_客戶資料匯出.xlsx"。
