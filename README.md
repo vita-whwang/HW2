@@ -47,8 +47,50 @@
 	}
 
 　* 所有看到 db.Entry(client).State = EntityState.Modified; 的寫法，都要改成資料繫結延遲驗證的方式做檢查 ( TryUpdateModel )，然後搭配自訂的 Interface 去針對特定表單欄位做 Model Binding，避免 over-posting 的問題發生。
+	
+	
+	以BankController為例
+	[HttpPost]
+	[ValidateAntiForgeryToken]
+	public ActionResult Edit(int Id, FormCollection form)
+	{
+		var 客戶銀行資訊 = BankRepository.FindBankById(Id);
+		if (ModelState.IsValid)
+		{
+			if (TryUpdateModel<I客戶銀行資訊更新>(客戶銀行資訊))
+			{
+				BankRepository.UnitOfWork.Commit();
+			}
+			return RedirectToAction("Index");
+		}
+		ViewBag.客戶Id = new SelectList(ClientRepository.GetAll(), "Id", "客戶名稱", 客戶銀行資訊.客戶Id);
+		return View(客戶銀行資訊);
+	}
+	
+	[HttpPost, ActionName("Delete")]
+	[ValidateAntiForgeryToken]
+	public ActionResult DeleteConfirmed(int id)
+	{
+		客戶銀行資訊 客戶銀行資訊 = BankRepository.FindBankById(id);
 
-
+		if (TryUpdateModel(客戶銀行資訊, new string[] { "isDelete" }))
+		{
+			BankRepository.UnitOfWork.Commit();
+		}
+		return RedirectToAction("Index");
+	}
+	
+	Bank/Delete.cshtml
+	 @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(m => m.isDelete, new { Value=true})
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+	
+	
 
 
 　* 實作匯出資料功能，可將「客戶資料」匯出，用 FileResult 輸出檔案，輸出格式不拘 (XLS, CSV, ...)，下載檔名規則："YYYYMMDD_客戶資料匯出.xlsx"。
