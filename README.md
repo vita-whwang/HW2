@@ -68,7 +68,6 @@
   
 　* 實作 Master/Details 頁面，修改「客戶資料」的 Details 與 Edit 頁面，讓該頁面同時顯示「客戶銀行資訊」與「客戶聯絡人」的清單資料。
 
-	不知道Master/Details是指哪隻程式
 
 
 
