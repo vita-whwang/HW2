@@ -1,0 +1,198 @@
+﻿@model HW1.Models.ViewModel.ClientEditViewModel
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>客戶資料</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.Client.Id)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Client.客戶名稱, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Client.客戶名稱)
+                @Html.ValidationMessageFor(model => model.Client.客戶名稱)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Client.統一編號, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Client.統一編號)
+                @Html.ValidationMessageFor(model => model.Client.統一編號)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Client.電話, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Client.電話)
+                @Html.ValidationMessageFor(model => model.Client.電話)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Client.傳真, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Client.傳真)
+                @Html.ValidationMessageFor(model => model.Client.傳真)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Client.地址, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Client.地址)
+                @Html.ValidationMessageFor(model => model.Client.地址)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Client.Email, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Client.Email)
+                @Html.ValidationMessageFor(model => model.Client.Email)
+            </div>
+        </div>
+
+
+    </div>
+    
+    
+    
+    
+    <div class="form-horizontal">
+        <h4>客戶聯絡人</h4>
+        <hr />
+         @for (int i = 0; i < Model.Contacts.Count();i++ ){
+            @Html.ValidationSummary(true)
+            @Html.HiddenFor(model => Model.Contacts[i].Id)
+            @Html.HiddenFor(model => Model.Contacts[i].客戶Id)
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => Model.Contacts[i].職稱, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => Model.Contacts[i].職稱)
+                @Html.ValidationMessageFor(model => Model.Contacts[i].職稱)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => Model.Contacts[i].姓名, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => Model.Contacts[i].姓名)
+                @Html.ValidationMessageFor(model => Model.Contacts[i].姓名)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => Model.Contacts[i].Email, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => Model.Contacts[i].Email)
+                @Html.ValidationMessageFor(model => Model.Contacts[i].Email)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => Model.Contacts[i].手機, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => Model.Contacts[i].手機)
+                @Html.ValidationMessageFor(model => Model.Contacts[i].手機)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => Model.Contacts[i].電話, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => Model.Contacts[i].電話)
+                @Html.ValidationMessageFor(model => Model.Contacts[i].電話)
+            </div>
+        </div>
+             <br/><br/>
+         }
+    </div>
+    
+    
+    
+    
+    
+    
+    
+    <div class="form-horizontal">
+        <h4>客戶銀行資訊</h4>
+        <hr />
+        @for (int i = 0; i < Model.Banks.Count();i++ ){
+            @Html.ValidationSummary(true)
+
+            @Html.HiddenFor(model => Model.Banks[i].Id)
+            @Html.HiddenFor(model => Model.Banks[i].客戶Id)
+
+            <div class="form-group">
+                @Html.LabelFor(model => Model.Banks[i].銀行名稱, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => Model.Banks[i].銀行名稱)
+                    @Html.ValidationMessageFor(model => Model.Banks[i].銀行名稱)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => Model.Banks[i].銀行代碼, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => Model.Banks[i].銀行代碼)
+                    @Html.ValidationMessageFor(model => Model.Banks[i].銀行代碼)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => Model.Banks[i].分行代碼, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => Model.Banks[i].分行代碼)
+                    @Html.ValidationMessageFor(model => Model.Banks[i].分行代碼)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => Model.Banks[i].帳戶名稱, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => Model.Banks[i].帳戶名稱)
+                    @Html.ValidationMessageFor(model => Model.Banks[i].帳戶名稱)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => Model.Banks[i].帳戶號碼, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => Model.Banks[i].帳戶號碼)
+                    @Html.ValidationMessageFor(model => Model.Banks[i].帳戶號碼)
+                </div>
+            </div>
+            <br/><br/>
+        }
+    </div>
+    
+    
+            <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

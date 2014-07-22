@@ -1,0 +1,160 @@
+﻿@model HW1.Models.客戶資料
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>客戶資料</h4>
+	<hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.客戶名稱)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.客戶名稱)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.統一編號)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.統一編號)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.電話)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.電話)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.傳真)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.傳真)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.地址)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.地址)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+    </dl>
+</div>
+
+
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+
+<table class="table">
+    <tr>
+        <th>
+            職稱
+        </th>
+        <th>
+            姓名
+        </th>
+        <th>
+            Email
+        </th>
+        <th>
+            手機
+        </th>
+        <th>
+            電話
+        </th>
+        <th>
+            
+        </th>
+    </tr>
+
+@foreach (var row in ((IQueryable<HW1.Models.客戶聯絡人>)ViewBag.Contact)){
+    <tr>
+        <td>
+            @row.職稱
+        </td>
+        <td>
+             @row.姓名
+        </td>
+        <td>
+             @row.Email
+        </td>
+        <td>
+            @row.手機
+        </td>
+        <td>
+             @row.電話
+        </td>
+        <td>
+            @Html.ActionLink("Delete", "DeleteContact", new { id=row.Id })
+        </td>
+    </tr>
+}
+
+
+    <table class="table">
+    <tr>
+        <th>
+            銀行名稱
+        </th>
+        <th>
+            銀行代碼
+        </th>
+        <th>
+            分行代碼
+        </th>
+        <th>
+            帳戶名稱
+        </th>
+        <th>
+            帳戶號碼
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var row in ((IQueryable<HW1.Models.客戶銀行資訊>)ViewBag.Bank)){
+    <tr>
+        <td>
+            @row.銀行名稱
+        </td>
+        <td>
+             @row.銀行代碼
+        </td>
+        <td>
+             @row.分行代碼
+        </td>
+        <td>
+             @row.帳戶名稱
+        </td>
+        <td>
+             @row.帳戶號碼
+        </td>
+        <td>
+            @Html.ActionLink("Delete", "DeleteBank", new { id=row.Id })
+        </td>
+    </tr>
+}
+
+</table>
