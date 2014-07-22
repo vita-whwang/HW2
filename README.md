@@ -38,10 +38,6 @@
 	[IdFilter]
     public class BaseController : Controller
     {
-        /// <summary>
-        /// * 寫一個 BaseController 並覆寫 HandleUnknownAction 方法，找不到 Action 就顯示一頁自訂的 404 錯誤頁面。
-        /// </summary>
-        /// <param name="actionName"></param>
         protected override void HandleUnknownAction(string actionName)
         {
 
@@ -140,7 +136,6 @@
         客戶聯絡人Repository ContactRepository = RepositoryHelper.Get客戶聯絡人Repository();
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            //　* 實作客戶聯絡人的「模型驗證」，同一個客戶下的聯絡人，其 Email 不能重複。
             if (ContactRepository.findEmailByClientId(this.客戶Id,this.Id,this.Email))
             {
                 yield return new ValidationResult("Email與其他聯絡人重複", new string[] { "Email" });
