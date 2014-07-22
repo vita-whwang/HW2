@@ -152,3 +152,14 @@
             }
         }   
     }
+	
+	
+	public  class 客戶聯絡人Repository : EFRepository<客戶聯絡人>, I客戶聯絡人Repository
+	{
+		...
+        public bool findEmailByClientId(int ClientId,int id,string Email)
+        {
+            return Where(p => p.客戶Id == ClientId && p.Id!=id && p.Email == Email && p.isDelete==false).Any();
+        }
+
+	}
