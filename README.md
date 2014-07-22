@@ -5,9 +5,9 @@
 3. 請接續上週的功能繼續實作，需求如下：
 
 　* 對於從網址列上出現的 id 值，撰寫一個自訂的 Action Filter (動作過濾器) 檢查傳入的 id 格式是否符合要求，格式不對就導向回首頁。
+
 	public class IdFilterAttribute : ActionFilterAttribute
     {
-        
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
             string id = filterContext.HttpContext.Request.QueryString["id"];
@@ -35,6 +35,7 @@
 	
 	
 　* 寫一個 BaseController 並覆寫 HandleUnknownAction 方法，找不到 Action 就顯示一頁自訂的 404 錯誤頁面。
+
 	[IdFilter]
     public class BaseController : Controller
     {
@@ -49,6 +50,7 @@
 　
 
   * 實作匯出資料功能，可將「客戶資料」匯出，用 FileResult 輸出檔案，輸出格式不拘 (XLS, CSV, ...)，下載檔名規則："YYYYMMDD_客戶資料匯出.xlsx"
+  
   	public ActionResult Report()
 	{
 		string result = "";
@@ -61,11 +63,13 @@
   
   
 　* 實作 Master/Details 頁面，修改「客戶資料」的 Details 與 Edit 頁面，讓該頁面同時顯示「客戶銀行資訊」與「客戶聯絡人」的清單資料。
+
 	不知道Master/Details是指哪隻程式
 
 
 
 　* 「客戶資料」的 Details 頁面，請列出客戶銀行資訊與客戶連絡人的清單 (List)，並且可以增加「刪除」功能，可在這頁刪除客戶銀行資訊與客戶連絡人的資料，刪除成功後會繼續顯示客戶資料的 Details 頁面 (提示: 透過 ViewBag 或 ViewData 傳遞多個 Model 到 View 裡顯示 )
+	
 	@foreach (var row in ((IQueryable<HW1.Models.客戶聯絡人>)ViewBag.Contact)){
 		...
 		<td>
@@ -83,6 +87,7 @@
 	
 	
 　* 「客戶資料」的 Edit 頁面，請實作客戶銀行資訊與客戶連絡人的批次編輯功能，按下儲存按鈕，可以一次將所有資料儲存
+		
 		[HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(ClientEditViewModel model)
@@ -130,6 +135,7 @@
 
 
 　* 實作客戶聯絡人的「模型驗證」，同一個客戶下的聯絡人，其 Email 不能重複。
+	
 	[MetadataType(typeof(客戶聯絡人MetaData))]
     public partial class 客戶聯絡人 : I客戶聯絡人更新, IValidatableObject
     {
